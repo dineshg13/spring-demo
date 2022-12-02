@@ -1,32 +1,24 @@
 package com.dd.controller;
 
-import org.springframework.http.MediaType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
+@Slf4j
 public class DemoController {
 
-    @GetMapping(path = "/hello", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Map<String, String> hello(@RequestParam Integer num) {
-        if (num == 0) {
-            throw new RuntimeException("num is zero");
-        }
-        Map<String, String> map = new HashMap<>();
-        map.put("response", "Hello World!!" + num);
-        return map;
+    RestTemplate template = new RestTemplate();
 
-    }
-
-    @GetMapping("/api/foos")
+    @GetMapping("/api/foo")
     @ResponseBody
-    public String getFoos(@RequestParam(defaultValue = "test") String id) {
+    public String getFoo(@RequestParam(defaultValue = "test") String id) {
+        log.info("in getFoo");
+        String obj = template.getForObject("http://localhost:8081/" + id, String.class);
+        log.info("obj=" + obj);
         return "ID: " + id;
     }
 
