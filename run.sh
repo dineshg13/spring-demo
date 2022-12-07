@@ -2,8 +2,9 @@
 
 java -javaagent:opentelemetry-javaagent.jar \
       -Dotel.resource.attributes=service.name=java-service \
+      -Dotel.exporter.otlp.protocol=http/protobuf \
+      -Dotel.exporter.otlp.compression=gzip \
       -jar ./build/libs/demo-0.0.1-SNAPSHOT.jar
 
-#      -Dotel.traces.exporter=logging\
 #      -Dotel.metrics.exporter=logging\
 

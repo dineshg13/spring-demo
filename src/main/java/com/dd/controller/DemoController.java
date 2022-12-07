@@ -11,15 +11,21 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class DemoController {
 
-    RestTemplate template = new RestTemplate();
+  RestTemplate template = new RestTemplate();
 
-    @GetMapping("/api/foo")
-    @ResponseBody
-    public String getFoo(@RequestParam(defaultValue = "test") String id) {
-        log.info("in getFoo");
-        String obj = template.getForObject("http://localhost:8081/" + id, String.class);
-        log.info("obj=" + obj);
-        return "ID: " + id;
-    }
+  @GetMapping("/echo")
+  @ResponseBody
+  public String echo(@RequestParam(defaultValue = "test") String id) {
+    log.info("in getFoo");
+    return "ID: " + id;
+  }
 
+  @GetMapping("/api/foo")
+  @ResponseBody
+  public String getFoo(@RequestParam(defaultValue = "test") String id) {
+    log.info("in getFoo");
+    String obj = template.getForObject("http://localhost:8081/" + id, String.class);
+    log.info("obj=" + obj);
+    return "ID: " + id;
+  }
 }
