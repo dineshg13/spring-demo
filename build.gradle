@@ -27,6 +27,8 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka:2.9.2'
     implementation 'io.opentelemetry:opentelemetry-api:1.20.0'
     implementation 'io.opentelemetry:opentelemetry-sdk:1.20.0'
+    implementation 'com.datadoghq:datadog-api-client:2.6.0'
+
 
 }
 
